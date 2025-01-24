@@ -1,6 +1,6 @@
 # Excel Salary Dashboard
 
-![1_Salary_Dashboard.png](/0_Resources/Images/1_Salary_Dashboard_Final_Dashboard.gif)
+![Slaray GIF](https://github.com/user-attachments/assets/3014ce30-9fa1-47fd-b3e8-aea0b754197b)
 
 ## Introduction
 
@@ -9,7 +9,8 @@ This data jobs salary dashboard was created to help job seekers investigate sala
 The data is from my Excel course, which provides a foundation in analyzing data using this powerful tool. The data contains detailed information on job titles, salaries, locations, and essential skills that are presented here.
 
 ### Dashboard File
-My final dashboard is in [1_Salary_Dashboard.xlsx](1_Salary_Dashboard.xlsx).
+My final dashboard is in [Jobs_Salary.xlsx](https://github.com/user-attachments/files/18530210/Jobs_Salary.xlsx)
+
 
 ### Excel Skills Used
 
@@ -26,7 +27,7 @@ The dataset used for this project contains real-world data science job informati
 - **👨‍💼 Job titles**
 - **💰 Salaries**
 - **📍 Locations**
-- **🛠️ Skills**
+- **🛠️ Edacation**
 
 ## Dashboard Build
 
@@ -34,7 +35,8 @@ The dataset used for this project contains real-world data science job informati
 
 #### 📊 Data Science Job Salaries - Bar Chart
 
-<img src="/0_Resources/Images/1_Salary_Dashboard_Chart1.png" width="850" height="550" alt="Salary Dashboard Chart1">
+![Excel Salary](https://github.com/user-attachments/assets/7cbc40f1-33c1-4636-85b8-087e4eb3e475)
+
 
 - 🛠️ **Excel Features:** Utilized bar chart feature (with formatted salary values) and optimized layout for clarity.
 - 🎨 **Design Choice:** Horizontal bar chart for visual comparison of median salaries.
@@ -43,7 +45,8 @@ The dataset used for this project contains real-world data science job informati
 
 #### 🗺️ Country Median Salaries - Map Chart
 
-![1_Salary_Dashboard_Chart2.png](/0_Resources/Images/1_Salary_Dashboard_Country_Map.gif)
+![Excel Map](https://github.com/user-attachments/assets/73202bb0-0ec0-4d0a-a139-092600009847)
+
 
 - 🛠️ **Excel Features:** Utilized Excel's map chart feature to plot median salaries globally.
 - 🎨 **Design Choice:** Color-coded map to visually differentiate salary levels across regions.
@@ -56,34 +59,44 @@ The dataset used for this project contains real-world data science job informati
 #### 💰 Median Salary by Job Titles
 
 ```
-=MEDIAN(
-IF(
-    (jobs[job_title_short]=A2)*
-    (jobs[job_country]=country)*
-    (ISNUMBER(SEARCH(type,jobs[job_schedule_type])))*
-    (jobs[salary_year_avg]<>0),
-    jobs[salary_year_avg]
-)
+=IFERROR(
+  MEDIAN(
+    IF(
+      (Table1[Job Title]=B1)*
+      (Table1[Salary]<>0)*
+      (Table1[Country]=country)*
+      (Table1[Education Level]=education_level),
+      Table1[Salary]
+    )
+  ),
+  "No Data"
 )
 ```
 
 - 🔍 **Multi-Criteria Filtering:** Checks job title, country, schedule type, and excludes blank salaries.
 - 📊 **Array Formula:** Utilizes `MEDIAN()` function with nested `IF()` statement to analyze an array.
-- 🎯 **Tailored Insights:** Provides specific salary information for job titles, regions, and schedule types.
-- **🔢 Formula Purpose:** This formula populates the table below, returning the median salary based on job title, country, and type specified.
+- 🎯 **Tailored Insights:** Provides specific salary information for job titles, regions, and Edacation.
+- **🔢 Formula Purpose:** This formula populates the table below, returning the median salary based on job title, country, and Edaction.
 
 🍽️ Background Table
 
-![1_Salary_Dashboard_Screenshot1.png](/0_Resources/Images/1_Salary_Dashboard_Screenshot1.png)
+![Background_Table]
+(https://github.com/user-attachments/assets/d72c1c31-b422-44c1-8999-c3b01e15fd9e)
+
 
 📉 Dashboard Implementation
 
-<img src="/0_Resources/Images/1_Salary_Dashboard_Job_Title.png" width="400" height="500" alt="Salary Dashboard Title">
+![Excel_table](https://github.com/user-attachments/assets/f9b8b483-2d36-4d4d-99b5-ec3241d0d033)
 
-#### ⏰ Count of Job Schedule Type
+
+#### ⏰ Count of Edacation
 
 ```
-=FILTER(J2#,(NOT(ISNUMBER(SEARCH("and",J2#))+ISNUMBER(SEARCH(",",J2#))))*(J2#<>0))
+=COUNTIFS(
+    Salary_Data_Based_country_and_r!E2:E3134, IF(job_title="All", "*", job_title),
+    Salary_Data_Based_country_and_r!H2:H3134, IF(country="All", "*", country),
+    Salary_Data_Based_country_and_r!D2:D3134, IF(education_level="All", "*", education_level)
+)
 ```
 
 - 🔍 **Unique List Generation:** This Excel formula below employs the `FILTER()` function to exclude entries containing "and" or commas, and omit zero values.
@@ -95,7 +108,8 @@ IF(
 
 📉 Dashboard Implementation:
 
-<img src="/0_Resources/Images/1_Salary_Dashboard_Type.png" width="350" height="500" alt="Salary Dashboard Type">
+![Excel_Education](https://github.com/user-attachments/assets/dab031d4-cfaf-43e2-bf89-d0842ee4b311)
+
 
 ### ❎ Data Validation
 
